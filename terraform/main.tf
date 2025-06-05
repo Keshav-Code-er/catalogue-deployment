@@ -3,7 +3,7 @@ module "catalogue_instance" {
   ami = data.aws_ami.devOps_ami.id
   instance_type = "t2.micro"
   vpc_security_group_ids = [data.aws_ssm_parameter.catalogue_sg_id.value]
-  subnet_id = split(data.aws_ssm_parameter.private-subnet-ids)
+  subnet_id = data.aws_ssm_parameter.private-subnet-ids
   //user_data = file("catalogue.sh")
   tags = merge(
     {
