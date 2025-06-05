@@ -11,7 +11,27 @@ pipeline{
                        echo "Version from params: ${params.Version}"
                   }
             }
-            
+        
+            stage('init'){
+                  steps{
+                       sh """
+                       cd terraform
+                       terraform init -reconfigure
+
+                       """
+                  }
+            }
+
+             stage('Plan'){
+                  steps{
+                       sh """
+                       cd terraform
+                       terraform plan
+
+                       """
+                  }
+            }
+          
        }
 
        post{
