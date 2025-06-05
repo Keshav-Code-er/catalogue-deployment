@@ -3,8 +3,7 @@ pipeline{
        parameters {
         string(name: 'Version', defaultValue: '1.0.1', description: 'which version to deployment')
     }
-
-       stages {
+          stages {
             stage('Deploy'){
                   steps{
                        echo "Deploying..."
@@ -16,7 +15,7 @@ pipeline{
                   steps{
                        sh """
                        cd terraform
-                       terraform init --reconfigure
+                       terraform init -reconfigure
 
                        """
                   }
