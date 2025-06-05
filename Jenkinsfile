@@ -12,7 +12,7 @@ pipeline{
                   }
             }
         
-            stage('init'){
+            stage('Init'){
                   steps{
                        sh """
                        cd terraform
