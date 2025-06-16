@@ -1,16 +1,16 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "5.84.0"
     }
   }
 
 
- backend "s3" {
-    bucket   = "joindevops-shop1"
-    key      = "catalogue-dev"
-    region   = "us-east-1"
+  backend "s3" {
+    bucket         = "joindevops-shop1"
+    key            = "catalogue-dev"
+    region         = "us-east-1"
     dynamodb_table = "joindevops-shop-lock1"
   }
 }
@@ -19,5 +19,5 @@ terraform {
 
 provider "aws" {
   # Configuration options
-  region  = "us-east-1"
+  region = "us-east-1"
 }

@@ -1,13 +1,13 @@
 module "catalogue_instance" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  ami = data.aws_ami.devOps_ami.id
-  instance_type = "t2.micro"
+  source                 = "terraform-aws-modules/ec2-instance/aws"
+  ami                    = data.aws_ami.devOps_ami.id
+  instance_type          = "t2.micro"
   vpc_security_group_ids = [data.aws_ssm_parameter.catalogue_sg_id.value]
-  subnet_id = element(split(",",data.aws_ssm_parameter.private-subnet-ids.value),0)
+  subnet_id              = element(split(",", data.aws_ssm_parameter.private-subnet-ids.value), 0)
   //user_data = file("catalogue.sh")
   tags = merge(
     {
-        Name = "Catalogue-DEV-AMI"
+      Name = "Catalogue-DEV-AMI"
     },
     var.common_tags
   )
@@ -22,8 +22,8 @@ resource "null_resource" "cluster" {
 
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
- #connection establishment
-    connection {
+  #connection establishment
+  connection {
     type     = "ssh"
     user     = "centos"
     password = "DevOps321"
@@ -32,9 +32,9 @@ resource "null_resource" "cluster" {
 
   #copy the file
   provisioner "file" {
-    source = "catalogue.sh"
+    source      = "catalogue.sh"
     destination = "/tmp/catalogue.sh"
-    
+
   }
 
 
@@ -50,11 +50,11 @@ resource "null_resource" "cluster" {
 #stop instance to take AMI
 resource "aws_ec2_instance_state" "catalogue_instance" {
   instance_id = module.catalogue_instance.id
-  state = "stopped"
- 
+  state       = "stopped"
+
 }
 
 output "app_version" {
   value = var.app_version
-  
+
 }
