@@ -54,11 +54,11 @@ resource "null_resource" "cluster" {
 
 } */
 
-# resource "aws_ami_from_instance" "catalogue_ami" {
-#   name = "${var.common_tags.component}-${local.current_time}"
-#   source_instance_id = module.catalogue_instance.id
+resource "aws_ami_from_instance" "catalogue_ami" {
+  name = "${var.common_tags.component}-${local.current_time}"
+  source_instance_id = module.catalogue_instance.id
   
-# }
+}
 
 # resource "null_resource" "delete_instance" {
 #   triggers = {
