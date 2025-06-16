@@ -47,12 +47,12 @@ resource "null_resource" "cluster" {
   }
 }
 
-#stop instance to take AMI
-resource "aws_ec2_instance_state" "catalogue_instance" {
-  instance_id = module.catalogue_instance.id
-  state       = "stopped"
+# #stop instance to take AMI
+# resource "aws_ec2_instance_state" "catalogue_instance" {
+#   instance_id = module.catalogue_instance.id
+#   state       = "stopped"
 
-}
+# }
 
 output "app_version" {
   value = var.app_version
