@@ -48,28 +48,31 @@ resource "null_resource" "cluster" {
 }
 
 #stop instance to take AMI
-/* resource "aws_ec2_instance_state" "catalogue_instance" {
+ resource "aws_ec2_instance_state" "catalogue_instance" {
   instance_id = module.catalogue_instance.id
   state       = "stopped"
+  depends_on = [ null_resource.cluster ]
 
-} */
+}
 
 resource "aws_ami_from_instance" "catalogue_ami" {
   name = "${var.common_tags.component}-${local.current_time}"
   source_instance_id = module.catalogue_instance.id
+  depends_on = [ aws_ec2_instance_state.catalogue_instance ]
   
 }
 
-# resource "null_resource" "delete_instance" {
-#   triggers = {
-#     ami_id = aws_ami_from_instance.catalogue_ami.id
-#   }
+resource "null_resource" "delete_instance" {
+  triggers = {
+    ami_id = aws_ami_from_instance.catalogue_ami.id
+  }
 
-#   provisioner "local-exec" {
-#     command = "aws ec2 terminate-instances --instance-ids ${module.catalogue_instance.id}"    
-#   }
+  provisioner "local-exec" {
+    command = "aws ec2 terminate-instances --instance-ids ${module.catalogue_instance.id}"    
+  }
+  depends_on = [ aws_ami_from_instance.catalogue_ami ]
   
-# }
+}
 
 output "app_version" {
   value = var.app_version
