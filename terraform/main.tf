@@ -160,23 +160,23 @@ resource "aws_autoscaling_policy" "catalogue" {
   }
 }
 
-resource "aws_lb_listener_rule" "catalogue" {
-  listener_arn = data.aws_ssm_parameter.app_alb_listener_arn.value
-  priority     = 10
+# resource "aws_lb_listener_rule" "catalogue" {
+#   listener_arn = data.aws_ssm_parameter.app_alb_listener_arn.value
+#   priority     = 10
 
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.catalogue.arn
-  }
+#   action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.catalogue.arn
+#   }
 
-  condition {
-    host_header {
+#   condition {
+#     host_header {
 
-      # for DEV instances, it shoud be app-dev and for PROD it should be app-prod
-      values = ["${var.common_tags.component}.app-${var.env}.${var.domain_name}"]
-    }
-  }
-}
+#       # for DEV instances, it shoud be app-dev and for PROD it should be app-prod
+#       values = ["${var.common_tags.component}.app-${var.env}.${var.domain_name}"]
+#     }
+#   }
+# }
 
 
 output "app_version" {
