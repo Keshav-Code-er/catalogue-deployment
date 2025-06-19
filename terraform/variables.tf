@@ -18,7 +18,7 @@ variable "common_tags" {
 }
 
 variable "domain_name" {
-  default = ["joindevops.shop"]
+  default = "joindevops.shop"
   
 }
 
