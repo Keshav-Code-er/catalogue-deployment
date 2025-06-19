@@ -19,6 +19,6 @@ variable "common_tags" {
 
 variable "app_version" {
   # this is just to test variables is flowing from terraform to shell and then to ansible
-  default = "10.0.2"
+  default = "10.3.0"
 
 }
