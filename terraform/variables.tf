@@ -17,6 +17,11 @@ variable "common_tags" {
   }
 }
 
+variable "domain_name" {
+  default = ["joindevops.shop"]
+  
+}
+
 variable "app_version" {
   # this is just to test variables is flowing from terraform to shell and then to ansible
   default = "10.3.0"
