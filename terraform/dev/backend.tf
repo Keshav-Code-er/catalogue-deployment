@@ -1,7 +1,7 @@
-bucket         = "joindevops-shop"
+bucket         = "joindevops-shop1"
 key            = "catalogue-dev"
 region         = "us-east-1"
-dynamodb_table = "joindevops-shop-lock"
+dynamodb_table = "joindevops-shop-lock1"
 
 
 
