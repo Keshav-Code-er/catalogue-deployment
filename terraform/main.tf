@@ -4,6 +4,7 @@ module "catalogue_instance" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [data.aws_ssm_parameter.catalogue_sg_id.value]
   subnet_id              = element(split(",", data.aws_ssm_parameter.private-subnet-ids.value), 0)
+  iam_instance_profile = "catalogue_profile"
   //user_data = file("catalogue.sh")
   tags = merge(
     {
